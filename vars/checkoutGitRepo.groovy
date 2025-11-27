@@ -1,10 +1,8 @@
-def call (String branch = 'master' , String repoUrl ) {
-    checkout ([
-        $class: 'GitSCM',
-        branches: [[name: "*/${branch}"]],
-        extensions: [],
-        uesrRemoteConfigs: [[url: repoUrl]]
+def call(Map args = [:]) {
+    // Default URL if not passed
+    def repoUrl = args.url ?: 'https://github.com/aftabshaikh10/addressbook.git'
+    def branchName = args.branch ?: 'main'   // change if your branch is master
 
-
-    ])
+    git url: repoUrl, branch: branchName
 }
+
